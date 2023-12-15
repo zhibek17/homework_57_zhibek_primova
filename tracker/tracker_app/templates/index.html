@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+    h1{
+        color: darkred;
+        font-weight: bold;
+        text-align: center;
+    }
+    </style>
+
+    <h1>Issue Tracker</h1>
+
+    <div class="container">
+        <div class="row">
+            {% for task in tasks %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ task.summary }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ task.description }}</h6>
+                        <h4 class="card-title">{{ task.status }}</h4>
+                        <h4 class="card-title">{{ task.type }}</h4>
+                        <a href="{% url 'task_view' pk=task.pk %}" class="card-link">Подробнее</a>
+                        <a href="{% url 'task_update' pk=task.pk %}" class="card-link">Обновить</a>
+                        <a href="{% url 'task_delete' pk=task.pk %}" class="card-link">Удалить</a>
+                        <p class="card-text">{{ task.created_at|date:"Y-m-d" }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        div{
+            text-align: center;
+        }
+        h1{
+            color: darkred;
+            padding: 40px;
+        }
+    </style>
+    <div>
+        <h1>More about Task</h1>
+        <p><strong>ID:</strong> {{ task.id }}</p>
+        <p><strong>Summary:</strong> {{ task.summary }}</p>
+        <p><strong>Description:</strong> {{ task.description }}</p>
+        <p><strong>Status:</strong> {{ task.status }}</p>
+        <p><strong>Type:</strong> {{ task.type }}</p>
+        <a href="{% url 'index' %}">Main page</a>
+    </div>
+
+{% endblock %}
