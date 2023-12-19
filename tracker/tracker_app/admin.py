@@ -4,7 +4,7 @@ from .models import Task, Status, Type
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ['id', 'summary', 'description', 'status', 'type', 'created_at', 'updated_at']
+    list_display = ['id', 'summary', 'description', 'status', 'created_at', 'updated_at']
     list_filter = ['status', 'type']
     search_fields = ['summary']
 

@@ -11,8 +11,6 @@ class AbstractModel(models.Model):
 
 class Type(AbstractModel):
     name = models.CharField(max_length=100, blank=False, null=False)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
 
     def __str__(self):
         return self.name
@@ -20,8 +18,6 @@ class Type(AbstractModel):
 
 class Status(AbstractModel):
     name = models.CharField(max_length=100, blank=False, null=False)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Время изменения')
 
     def __str__(self):
         return self.name
@@ -43,7 +39,7 @@ class Task(AbstractModel):
     summary = models.CharField(max_length=100, blank=False, null=False, verbose_name='Краткое описание')
     description = models.TextField(blank=True, null=True, verbose_name='Полное описание')
     status = models.ForeignKey(Status, on_delete=models.PROTECT, verbose_name='Статус')
-    type = models.ForeignKey(Type, on_delete=models.PROTECT, verbose_name='Тип')
+    type = models.ManyToManyField(Type, verbose_name='Тип')
 
     def __str__(self):
         return self.summary

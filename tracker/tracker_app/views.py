@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView
-from tracker.tracker_app.models import Task, Type, Status
-from tracker.tracker_app.forms import TaskForm
+from .models import Task, Type, Status
+from .forms import TaskForm
 
 
 class IndexView(TemplateView):
@@ -22,7 +22,7 @@ class TaskView(TemplateView):
 class TaskAdd(TemplateView):
     def get(self, request, *args, **kwargs):
         form = TaskForm()
-        return render(request, 'article_create.html', {'form': form})
+        return render(request, 'task_add.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
         form = TaskForm(data=request.POST)
@@ -34,8 +34,8 @@ class TaskAdd(TemplateView):
                 summary=form.cleaned_data.get('summary'),
                 description=form.cleaned_data.get('description'),
             )
-            task.type.set(type)
-            task.status.set(status)
+            task.type.set([type])
+            task.status.set([status])
             return redirect('index', pk=task.pk)
         else:
             return render(request, 'task_add.html', {'form': form})
@@ -65,8 +65,8 @@ class TaskUpdate(TemplateView):
             status = form.cleaned_data.pop('status')
             task.summary = form.cleaned_data.get('summary')
             task.description = form.cleaned_data.get('description')
-            task.type.set(type)
-            task.status.set(status)
+            task.type.set([type])
+            task.status.set([status])
             task.save()
             return redirect('index', pk=task.pk)
         else:
@@ -82,3 +82,4 @@ class TaskDelete(TemplateView):
         task = get_object_or_404(Task, pk=kwargs.get('pk'))
         task.delete()
         return redirect('index')
+
