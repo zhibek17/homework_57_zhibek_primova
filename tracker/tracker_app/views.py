@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView
-from .models import Task, Type, Status
+from .models import Task
 from .forms import TaskForm
+from django.utils import timezone
+from datetime import timedelta
 
 
 class IndexView(TemplateView):
@@ -39,7 +41,6 @@ class TaskAdd(TemplateView):
             return redirect('index', pk=task.pk)
         else:
             return render(request, 'task_add.html', {'form': form})
-
 
 
 class TaskUpdate(TemplateView):
@@ -82,4 +83,5 @@ class TaskDelete(TemplateView):
         task = get_object_or_404(Task, pk=kwargs.get('pk'))
         task.delete()
         return redirect('index')
+
 
