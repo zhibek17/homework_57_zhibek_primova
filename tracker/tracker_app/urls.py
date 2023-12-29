@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import *
+from .views.task_views import IndexView, TaskView, TaskAdd, TaskUpdate, TaskDelete
 
+app_name = 'tracker_app'
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('task/<int:pk>/', TaskView.as_view(), name='task_view'),

@@ -15,6 +15,6 @@
             {% csrf_token %}
             <input type="submit" class="btn btn-danger" value="Yes"/>
         </form>
-        <a href="{% url 'task_view' pk=task.pk %}">No</a>
+        <a href="{% url 'tracker_app:task_view' pk=task.pk %}">No</a>
     </div>
 {% endblock %}
